@@ -1,0 +1,3 @@
+Lupin,World,Arsene,858-932-4616,N,BANK:,163747,SHIP:,H!l!l!l!l
+Cordy,ChromPls,Cordelia Ylisse,2913932020,N,BANK:,1234567,SHIP:,H!1313 Southern Way!Ylisstol!YL!29345
+Chrom,ForYlisse,Chrom Exalted,805-861-2912,N,BANK:,2823934040,SHIP:,A!1313!3838 Royalty Road!Ylisstol!YL!93912

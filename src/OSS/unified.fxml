@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OSS.CustomControl">
+   <children>
+       <!--Start of MainDisplay Items-->
+      <ListView fx:id="MainListing" layoutX="244.0" layoutY="98.0" mouseTransparent="true" prefHeight="340.0" prefWidth="436.0" visible="false" />
+      <Label fx:id="MainUserLabel" alignment="CENTER" layoutX="240.0" layoutY="56.0" mouseTransparent="true" prefHeight="34.0" prefWidth="436.0" text="Here's What We've Got!" visible="false">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="MainLogout" layoutX="32.0" layoutY="56.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="34.0" prefWidth="112.0" text="Logout?" visible="false" onAction="#unifiedLogin"/>
+      <Button fx:id="MainUpdateCard" layoutX="97.0" layoutY="166.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="42.0" prefWidth="138.0" text="Update Card?" visible="false" onAction="#unifiedUpdateCard"/>
+      <Button fx:id="MainUpdateShipping" layoutX="97.0" layoutY="223.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="42.0" prefWidth="138.0" text="Update Shipping?" visible="false" onAction="#unifiedUpdateShipping"/>
+      <Button fx:id="MainEnterCheckout" layoutX="97.0" layoutY="322.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="66.0" prefWidth="138.0" text="Checkout!" visible="false" onAction="#unifiedCheckout"/>
+       <!--Start of MainDisplay Items-->
+      <Rectangle fx:id="LoginBack" arcHeight="5.0" arcWidth="5.0" fill="#c4f7ff" height="280.0" layoutX="251.0" layoutY="102.0" mouseTransparent="false" stroke="BLACK" strokeType="INSIDE" visible="true" width="308.0" />
+      <Button fx:id="LoginButt" layoutX="307.0" layoutY="260.0" mnemonicParsing="false" mouseTransparent="false" onAction="#login" prefHeight="25.0" prefWidth="199.0" text="Login" visible="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="LoginCreateAccButt" layoutX="307.0" layoutY="313.0" mnemonicParsing="false" mouseTransparent="false" onAction="#unifiedRegister" prefHeight="4.0" prefWidth="199.0" text="Register" visible="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="LoginUsername" layoutX="287.0" layoutY="152.0" mouseTransparent="false" prefHeight="38.0" prefWidth="239.0" promptText="Username..." visible="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="LoginPassword" layoutX="286.0" layoutY="203.0" mouseTransparent="false" prefHeight="37.0" prefWidth="239.0" promptText="Password..." visible="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label fx:id="LoginFailure" alignment="CENTER" layoutX="316.0" layoutY="354.0" mouseTransparent="False" prefHeight="27.0" prefWidth="182.0" text="" textFill="RED" visible="true" />
+       <!--End of Login, Start of Register-->
+      <Rectangle fx:id="RegisterBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="381.0" layoutX="114.0" layoutY="54.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" visible="false" width="582.0" />
+      <Label fx:id="RegisterTitle" alignment="CENTER" layoutX="158.0" layoutY="84.0" mouseTransparent="true" prefHeight="35.0" prefWidth="496.0" text="Welcome to IMACON! We're happy to have you with us today!" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="RegisterNewUser" layoutX="156.0" layoutY="166.0" mouseTransparent="true" prefHeight="28.0" prefWidth="162.0" promptText="username..." visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="RegisterNewPass" layoutX="156.0" layoutY="206.0" mouseTransparent="true" prefHeight="28.0" prefWidth="162.0" promptText="password..." visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="RegisterCCNum" layoutX="156.0" layoutY="244.0" mouseTransparent="true" prefHeight="28.0" prefWidth="162.0" promptText="card number..." visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="RegisterPhoneNum" layoutX="156.0" layoutY="289.0" mouseTransparent="true" prefHeight="28.0" prefWidth="162.0" promptText="phone number..." visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="RegisterName" layoutX="406.0" layoutY="153.0" mouseTransparent="true" prefHeight="26.0" prefWidth="266.0" promptText="name..." visible="false" />
+      <TextField fx:id="RegisterAddress" layoutX="406.0" layoutY="200.0" mouseTransparent="true" prefHeight="28.0" prefWidth="266.0" promptText="Street Address" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="RegisterCity" layoutX="406.0" layoutY="250.0" mouseTransparent="true" prefHeight="28.0" prefWidth="64.0" promptText="City" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="RegisterState" layoutX="494.0" layoutY="250.0" mouseTransparent="true" prefHeight="28.0" prefWidth="64.0" promptText="State" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="RegisterZip" layoutX="577.0" layoutY="250.0" mouseTransparent="true" prefHeight="28.0" prefWidth="94.0" promptText="ZIP" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <CheckBox fx:id="RegisterApartment" layoutX="406.0" layoutY="306.0" mnemonicParsing="false" mouseTransparent="true" onAction="#activateRoomNum" prefHeight="28.0" prefWidth="266.0" text="Apartment?" visible="false" />
+      <TextField fx:id="RegisterRoomNum" layoutX="488.0" layoutY="338.0" mouseTransparent="true" prefHeight="26.0" prefWidth="178.0" promptText="Room Number?" visible="false" />
+      <Button fx:id="RegisterButt" alignment="CENTER" layoutX="202.0" layoutY="364.0" mnemonicParsing="false" mouseTransparent="true" onAction="#RegisterAcc" prefHeight="50.0" prefWidth="266.0" style="-fx-background-color: lightblue;" text="REGISTER!" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <CheckBox fx:id="RegisterPremium" layoutX="158.0" layoutY="332.0" mnemonicParsing="false" mouseTransparent="true" text="Register for IMACON CRIME?" visible="false" />
+      <Label fx:id="RegisterAccountIsDup" layoutX="158.0" layoutY="125.0" mouseTransparent="true" prefHeight="26.0" prefWidth="162.0" visible="false" />
+       <!--End of Register, Start of Checkout-->
+      <Rectangle fx:id="CheckoutBack" arcHeight="5.0" arcWidth="5.0" fill="#e8f4ff" height="400.0" layoutX="105.0" layoutY="50.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" visible="false" width="600.0" />
+      <ListView fx:id="CheckoutItemList" layoutX="131.0" layoutY="108.0" mouseTransparent="true" prefHeight="294.0" prefWidth="391.0" visible="false" />
+      <Label fx:id="CheckoutItemTitle" layoutX="131.0" layoutY="64.0" mouseTransparent="true" prefHeight="37.0" prefWidth="391.0" text="Here's Your List of Items!" visible="false">
+         <font>
+            <Font size="18.0"/>
+         </font>
+      </Label>
+      <Label fx:id="CheckoutTheSubTotal" layoutX="532.0" layoutY="125.0" mouseTransparent="true" prefHeight="38.0" prefWidth="159.0" text="SUBTOTAL: (here)" visible="false" />
+      <CheckBox fx:id="CheckoutDeliveryBox" layoutX="532.0" layoutY="181.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="26.0" prefWidth="159.0" text="Delivery?" visible="false" onAction="#updateCheckoutTotal"/>
+      <CheckBox fx:id="CheckoutAddPremiumBox" layoutX="532.0" layoutY="226.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="58.0" prefWidth="159.0" text="Would you like to &#10;add a year of &#10;IMACON CRIME for $40?" visible="false" onAction="#updateCheckoutTotal"/>
+      <Label fx:id="CheckoutTheTotal" layoutX="532.0" layoutY="298.0" mouseTransparent="true" prefHeight="38.0" prefWidth="159.0" text="TOTAL: (here)" visible="false" />
+      <Button fx:id="CheckoutPlaceOrder" layoutX="538.0" layoutY="365.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="38.0" prefWidth="151.0" text="Place Order!" visible="false" onAction="#placeOrder"/>
+       <!--End of Checkout, Start of updateCard-->
+      <Rectangle fx:id="UpdateCardBack" arcHeight="5.0" arcWidth="5.0" fill="#befbff" height="298.0" layoutX="117.0" layoutY="96.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" visible="false" width="575.0" />
+      <Label fx:id="UpdateCardMessage" layoutX="191.0" layoutY="121.0" mouseTransparent="true" prefHeight="42.0" prefWidth="458.0" text="Hey, that card didn't work! Let's try this again..." visible="false">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <TextField fx:id="UpdateWorkingCard" layoutX="169.0" layoutY="206.0" mouseTransparent="true" prefHeight="42.0" prefWidth="458.0" promptText="Enter a working card number..." visible="false" />
+      <Button fx:id="UpdateCardUpdated" layoutX="191.0" layoutY="306.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="52.0" prefWidth="147.0" text="Update!" visible="false" onAction="#updateCard"/>
+      <Button fx:id="UpdateCardAccountSwitch" layoutX="453.0" layoutY="306.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="52.0" prefWidth="147.0" text="Switch Account!" visible="false" onAction="#unifiedLogin" />
+      <Label fx:id="UpdateCardTheOr" layoutX="384.0" layoutY="323.0" mouseTransparent="true" text="Or..." visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+       <!--End of updateCard, start of updateShipping-->
+      <Rectangle fx:id="UpdateShippingBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="369.0" layoutX="109.0" layoutY="62.0" mouseTransparent="true" stroke="#260202" strokeType="INSIDE" visible="false" width="575.0" />
+      <TextField fx:id="UpdateShippingStreet" layoutX="259.0" layoutY="166.0" mouseTransparent="true" prefHeight="28.0" prefWidth="266.0" promptText="Street Address" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <opaqueInsets>
+            <Insets bottom="10.0" />
+         </opaqueInsets>
+      </TextField>
+      <TextField fx:id="UpdateShippingCity" layoutX="259.0" layoutY="216.0" mouseTransparent="true" prefHeight="28.0" prefWidth="64.0" promptText="City" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="UpdateShippingState" layoutX="347.0" layoutY="216.0" mouseTransparent="true" prefHeight="28.0" prefWidth="64.0" promptText="State" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="UpdateShippingZip" layoutX="430.0" layoutY="216.0" mouseTransparent="true" prefHeight="28.0" prefWidth="94.0" promptText="ZIP" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <CheckBox layoutX="259.0" layoutY="272.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="28.0" prefWidth="266.0" text="Apartment?" visible="false" />
+      <TextField fx:id="UpdateShippingRoomNum" disable="true" layoutX="341.0" layoutY="304.0" mouseTransparent="true" prefHeight="26.0" prefWidth="178.0" promptText="Room Number?" visible="false">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+      <Label fx:id="UpdateShippingShipAddUp" alignment="CENTER" layoutX="231.0" layoutY="102.0" mouseTransparent="true" prefHeight="39.0" prefWidth="332.0" text="Let's get that shipping address updated!" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="UpdateShippingShipUpdate" layoutX="296.0" layoutY="357.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="39.0" prefWidth="154.0" text="Update!" visible="false" onAction="#updateShipping">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+       <!--Start of MainDisplay Items-->
+   </children>
+</AnchorPane>
