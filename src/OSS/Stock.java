@@ -55,9 +55,9 @@ public class Stock {
         return false;
     }
 
-    public Item matchByName(String name){
+    public Item matchByID(String name){
         for(Item items : this.inventory) {
-            if(name.equals(items.getName()))
+            if(name.equals(items.getItemID()))
                 return items;
         }
         return new Item("ERROR",0.00, "ERROR", 0, "ERROR");

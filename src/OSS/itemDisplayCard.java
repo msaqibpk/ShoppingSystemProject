@@ -74,7 +74,7 @@ public class itemDisplayCard extends ListCell<String> {
             itemName = null;
             setGraphic(null);
         } else {
-            item = host.matchByName(thisItem);
+            item = host.matchByID(thisItem);
             itemLabel.setText(String.format("%s: %s In Stock: %s In Cart: %s",
                     item.getName(), item.getPrice(), host.matchedItem(item).getNumberOf(),
                     userCart.matchedItem(item).getNumberOf()));
