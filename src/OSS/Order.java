@@ -7,7 +7,7 @@ public class Order {
     File orderLog;
 
     public void noteOrder(Customer client, ShoppingCart order) throws IOException {
-        clientName = client.username;
+        clientName = client.custPIN;
         File orderLog = new File("OrderLog.txt");
         if (orderLog.createNewFile())
         {

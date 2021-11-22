@@ -1,10 +1,15 @@
 package OSS;
 
+import java.util.Date;
+
 public class Item {
 
+    private String itemID;
     private double price;
     private String name;
     private int numberOf = 0;
+    private String expDate;
+
 
     public double getPrice() {
         return price;
@@ -37,13 +42,21 @@ public class Item {
         numberOf-=quantity;
     }
 
-    public Item(double price, String name, int numberOf) {
+    public Item(String itemID, double price, String name, int numberOf, String expDate) {
+        this.itemID = itemID;
+        this.expDate = expDate;
         this.price = price;
         this.name = name;
         this.numberOf = numberOf;
     }
 
+    public String getItemID() {
+        return itemID;
+    }
 
+    public String getExpDate() {
+        return expDate;
+    }
 
     @Override
     public String toString() {

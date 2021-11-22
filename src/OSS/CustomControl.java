@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -45,7 +44,7 @@ public class CustomControl{
     Stock inventory = new Stock();
     ShoppingCart userCart = new ShoppingCart();
     ReadInventory storeMaster = new ReadInventory();
-    log dummyLog = new log();
+    CustomerLog dummyLog = new CustomerLog();
     Customer user;
     Shipping ship = new Shipping();
     Order orderLog = new Order();
@@ -151,7 +150,7 @@ public class CustomControl{
         MainListing.setVisible(true);
         displayMainListing();
         MainUserLabel.setVisible(true);
-        MainUserLabel.setText("Welcome, " + user.username+"!");
+        //MainUserLabel.setText("Welcome, " + user.username+"!");
         MainLogout.setVisible(true);
         MainEnterCheckout.setVisible(true);
         MainUpdateCard.setVisible(true);
@@ -331,7 +330,8 @@ public class CustomControl{
             ship.setState(RegisterState.getText());
             ship.setZipCode(RegisterZip.getText());
             user = new Customer();
-            user = user.setUp(RegisterNewUser.getText(),RegisterNewPass.getText(),RegisterName.getText(),RegisterPhoneNum.getText(),false,RegisterCCNum.getText(),ship.compileAddr());
+            user = user.setUp(false, RegisterNewUser.getText(),RegisterNewPass.getText(),
+                    0, RegisterName.getText(), RegisterCCNum.getText(),ship.compileAddr());
             dummyLog.getCustomerLog().add(user);
             dummyLog.saveToFile(dummyLog.getCustomerLog());
             unifiedMainDisplay();
@@ -350,11 +350,11 @@ public class CustomControl{
 
     public void updateShipping() throws IOException { //TODO Investigate List Duplication
         if(UpdateShippingRoomNum.getText().isBlank()) {
-            dummyLog.associateUser(user.username,user.password).updateShipping(String.format("H!%s!%s!%s!%s", UpdateShippingStreet.getText(), UpdateShippingCity.getText(),
+            dummyLog.associateUser(user.phoneNum,user.custPIN).updateShipping(String.format("H!%s!%s!%s!%s", UpdateShippingStreet.getText(), UpdateShippingCity.getText(),
                     UpdateShippingState.getText(), UpdateShippingZip.getText()));
         }
         else{
-            dummyLog.associateUser(user.username,user.password).updateShipping(String.format("A!%s!%s!%s!%s!%s", UpdateShippingRoomNum.getText(), UpdateShippingStreet.getText(),
+            dummyLog.associateUser(user.phoneNum,user.custPIN).updateShipping(String.format("A!%s!%s!%s!%s!%s", UpdateShippingRoomNum.getText(), UpdateShippingStreet.getText(),
                     UpdateShippingCity.getText(), UpdateShippingState.getText(), UpdateShippingZip.getText()));
         }
         dummyLog.saveToFile(dummyLog.getCustomerLog());

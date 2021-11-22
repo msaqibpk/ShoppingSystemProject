@@ -1,39 +1,38 @@
 package OSS;
 class Customer
 {
-    String username;
-    String password;
+    Boolean isPremium;
+    String custPIN;
+    int custPoints;
     String name;
     String phoneNum;
-    Boolean isPremium;
     String bankID;
     Shipping shipTo;
 
-    public Customer setUp(String username, String password, String name, String phoneNum, Boolean isPremium, String bID, String sID)
+    public Customer setUp(Boolean isPremium, String phoneNum, String custPIN, int custPoints, String name, String bID, String sID)
     {
         Customer newCustomer = new Customer();
-        newCustomer.username = username;
-        newCustomer.password = password;
+        newCustomer.isPremium = isPremium;
+        newCustomer.custPIN = custPIN;
+        newCustomer.custPoints = custPoints;
         newCustomer.name = name;
         newCustomer.phoneNum = phoneNum;
-        newCustomer.isPremium = isPremium;
         newCustomer.bankID = bID;
         newCustomer.shipTo = setUp(sID);
 
         return newCustomer;
     }
 
-    public Boolean nameMatch(String username)
-    {
-        if(username.equals(this.username))
+    public Boolean phoneMatch(String phone){
+        if(phone.equals(this.phoneNum))
             return true;
         else
             return false;
     }
 
-    public Boolean passMatch(String password)
+    public Boolean pinMatch(String username)
     {
-        if(password.equals(this.password))
+        if(username.equals(this.custPIN))
             return true;
         else
             return false;
@@ -49,7 +48,7 @@ class Customer
         char iP = 'N';
         if(isPremium)
             iP = 'P';
-        return this.username + "," + this.password + "," + this.name + "," + this.phoneNum + "," + iP + ",BANK:," + this.bankID + ",SHIP:," + this.shipTo.compileAddr();
+        return this.custPIN + "," + this.custPoints + "," + this.name + "," + this.phoneNum + "," + iP + ",BANK:," + this.bankID + ",SHIP:," + this.shipTo.compileAddr();
     }
 
     public Shipping setUp(String input){

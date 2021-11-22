@@ -1,3 +1,3 @@
-30,Mountain Bike,2
-25,GrannyBike,3
-75,Dirt Bike,1
+IDXP34,30,Mountain Bike,2,N
+IDXP21,25,GrannyBike,3,N
+IDXP74,75,Dirt Bike,1,N

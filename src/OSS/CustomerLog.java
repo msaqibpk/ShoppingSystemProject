@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 
-class log {
+class CustomerLog {
     private ArrayList<Customer> CustomerLog = new ArrayList<Customer>();
 
     public void insertNew(Customer newCustomer) {
@@ -16,29 +16,29 @@ class log {
         return CustomerLog;
     }
 
-    public Boolean verifyLogIn(String username, String password) throws IOException {
+    public Boolean verifyLogIn(String phoneNum, String custPIN) throws IOException {
         readFromFile();
         for (Customer Customers : CustomerLog)  //This isn't calling for some reason
         {
-            if (username.equals(Customers.username) && password.equals(Customers.password))
+            if (phoneNum.equals(Customers.phoneNum) && custPIN.equals(Customers.custPIN))
                 return true;
         }
         return false;
     }
-    public Boolean noDupUser(String username) throws IOException {
+    public Boolean noDupUser(String phoneNum) throws IOException {
         readFromFile();
         for (Customer Customers : CustomerLog)
         {
-            if (username.equals(Customers.username)){
-                return true;//The username is a duplicate
+            if (phoneNum.equals(Customers.phoneNum)){
+                return true;//The phoneNum is a duplicate
             }
 
         }return false;//Not a duplicate
     }
 
-    public Customer associateUser(String username, String password) {
+    public Customer associateUser(String phoneNum, String custPIN) {
         for (Customer Customers : CustomerLog) {
-            if (Customers.nameMatch(username) && Customers.passMatch(password))
+            if (Customers.phoneMatch(phoneNum) && Customers.pinMatch(custPIN))
                 return Customers;
         }
         return new Customer(); //This should never trigger, associateUser should only be called AFTER verifyLogin!
@@ -73,18 +73,20 @@ class log {
         //setUpLog will create a file of this type if one did not already exist.
         File file = new File("CustomerLog.txt");
         Scanner clerk = new Scanner(file);
-        String id;
-        String pw;
-        String nm;
-        String pn;
+
         Boolean iP = false;
+        String phone;
+        String cID;
+        int custPoints;
+        String nm;
         String bID = null;
         String sID = null;
         String[] input;
 
 
         while (clerk.hasNextLine()) {
-            //Lupin,World,George Lupin,(123)456-7890,P,BANK:,630724666,SHIP:,H!5327 Dank Run!Lubbock!Texas!75555
+            //ExampleCustomer
+            //P,(123)456-7890,C37A4B,(CustomerPoints),Arsene Lupin,BANK:,630724666,SHIP:,H!5327 Dank Run!Lubbock!Texas!75555
             input = clerk.nextLine().split(",");
             int length = input.length;
 //            System.out.println(length+ "= length");
@@ -92,15 +94,14 @@ class log {
 //                System.out.println(input[i]);
 //            }
             //System.out.println(input[0]);
-            id = input[0];
-            //System.out.println(input[1]);
-            pw = input[1];
-            nm = input[2];
-            pn = input[3];
-
-            //Checks to see if Customer is a premium user.
-            if (input[4].equals("P"))
+            if(input[0].equals("P"))
                 iP = true;
+            cID = input[1];
+            phone = input[2];
+            //System.out.println(input[1]);
+            custPoints = Integer.parseInt(input[3]);
+            nm = input[4];
+
             //Checks if banking information is available.
             if (input[5].equals("BANK:")) {
                 bID = input[6];
@@ -113,7 +114,7 @@ class log {
                 sID = input[6];
             }
             Customer newCustomer = new Customer();
-            newCustomer = newCustomer.setUp(id, pw, nm, pn, iP, bID, sID);
+            newCustomer = newCustomer.setUp(iP, phone, cID, custPoints, nm, bID, sID);
             insertNew(newCustomer);
         }
         clerk.close();

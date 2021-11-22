@@ -25,7 +25,7 @@ public class ShoppingCart {
             }
         }
         if(!existing) {
-            Item addTo = new Item(matching.getPrice(), matching.getName(), 1);
+            Item addTo = new Item(matching.getItemID(), matching.getPrice(), matching.getName(), 1, matching.getExpDate());
             this.Cart.add(addTo);
         }
     }
@@ -51,7 +51,7 @@ public class ShoppingCart {
             if(matching.getName() == items.getName())
                 return items;
         }
-        return new Item(0.00, "ERROR", 0);
+        return new Item("ERROR", 0.00, "ERROR", 0, "ERROR");
     }
 
     public void emptyCart(){
@@ -68,7 +68,7 @@ public class ShoppingCart {
     }
 
     public String placeOrder(Customer user) {
-        return String.format("%s,%s,%s", user.username, user.bankID, cartTotal());
+        return String.format("%s,%s,%s", user.custPIN, user.bankID, cartTotal());
     }
 
     public int getBankCode(){

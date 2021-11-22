@@ -3,14 +3,10 @@ package OSS;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 
-import java.io.IOException;
-import java.nio.Buffer;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -66,7 +62,7 @@ public class Main extends Application {
 
 
     //Action Method for createAcc(register)
-    void registerCustomer(log customerLog) {
+    void registerCustomer(CustomerLog customerLog) {
         TextField newUsername = new TextField("Username");
         TextField newPass = new TextField("Password");
         this.customerName = new TextField("First and Last Name");
@@ -100,7 +96,7 @@ public class Main extends Application {
     button.setMaxSize()
     button.setPrefSize()
      */
-    void registerShipping(Customer user, log customerLog, Parent root) {
+    void registerShipping(Customer user, CustomerLog customerLog, Parent root) {
         Scene shippingSetup = new Scene(root, 800, 400);
     }
 
