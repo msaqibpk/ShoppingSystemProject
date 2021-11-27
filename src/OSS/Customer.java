@@ -38,6 +38,11 @@ class Customer
             return false;
     }
 
+    public void addPoints(int add)
+    {
+        custPoints += add;
+    }
+
     public void updateCard(String cardNumber)
     {
         this.bankID = cardNumber;

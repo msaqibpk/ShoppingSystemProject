@@ -25,7 +25,7 @@ public class ShoppingCart {
             }
         }
         if(!existing) {
-            Item addTo = new Item(matching.getItemID(), matching.getPrice(), matching.getName(), 1, matching.getExpDate());
+            Item addTo = new Item(matching.getItemID(), matching.getPrice(), matching.getName(), 1, matching.getBulk(), matching.getExpDate());
             this.Cart.add(addTo);
         }
     }
@@ -48,14 +48,14 @@ public class ShoppingCart {
 
     public Item matchedItem(Item matching){
         for(Item items : this.Cart) {
-            if(matching.getName() == items.getName())
+            if(matching.getName().equals(items.getName()))
                 return items;
         }
-        return new Item("ERROR", 0.00, "ERROR", 0, "ERROR");
+        return new Item("ERROR", 0.00, "ERROR", 0, false,"ERROR");
     }
 
     public void emptyCart(){
-        getCart().clear();
+        Cart.clear();
 
     }
 

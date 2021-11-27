@@ -1,29 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OSS.CustomControl">
+<AnchorPane prefHeight="447.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OSS.CustomControl">
    <children>
-      <ButtonBar layoutX="94.0" layoutY="44.0" prefHeight="39.0" prefWidth="476.0">
-        <buttons>
-            <Label alignment="CENTER" prefHeight="16.0" prefWidth="140.0" text="Label">
+      <AnchorPane fx:id="LoginGroup" layoutY="2.0" prefHeight="447.0" prefWidth="697.0">
+         <children>
+            <Rectangle fx:id="LoginBack" arcHeight="5.0" arcWidth="5.0" fill="#ffe357" height="280.0" layoutX="180.0" layoutY="84.0" mouseTransparent="false" stroke="BLACK" strokeType="INSIDE" visible="true" width="308.0" />
+            <Button fx:id="LoginButt" layoutX="235.0" layoutY="263.0" mnemonicParsing="false" mouseTransparent="false" onAction="#login" prefHeight="25.0" prefWidth="199.0" text="Login" visible="true">
                <font>
                   <Font size="16.0" />
                </font>
-            </Label>
-            <Button minWidth="42.0" mnemonicParsing="false" prefHeight="26.0" text="Button" />
-          <Button mnemonicParsing="false" text="Button" />
-            <Label alignment="CENTER" prefHeight="25.0" text="Label">
+            </Button>
+            <TextField fx:id="LoginUsername" layoutX="215.0" layoutY="157.0" mouseTransparent="false" prefHeight="38.0" prefWidth="239.0" promptText="Username..." visible="true">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="LoginPassword" layoutX="215.0" layoutY="206.0" mouseTransparent="false" prefHeight="37.0" prefWidth="239.0" promptText="Password..." visible="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="LoginButton" alignment="CENTER" layoutX="244.0" layoutY="116.0" mouseTransparent="False" prefHeight="27.0" prefWidth="182.0" text="Employee Logon">
+               <font>
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-        </buttons>
-      </ButtonBar>
+            <Label fx:id="LoginFailure" alignment="CENTER" layoutX="243.0" layoutY="315.0" mouseTransparent="False" prefHeight="27.0" prefWidth="182.0" visible="false" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ItemListGroup" layoutX="10.0" layoutY="12.0" prefHeight="447.0" prefWidth="697.0" visible="false">
+         <children>
+            <ListView fx:id="CheckoutItemList" editable="true" layoutX="29.0" layoutY="51.0" mouseTransparent="true" prefHeight="361.0" prefWidth="391.0" />
+            <Label layoutX="29.0" layoutY="14.0" prefHeight="27.0" prefWidth="391.0" text="CURRENT ITEMS" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="221.0" layoutX="444.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="239.0" />
+            <Label layoutX="462.0" layoutY="63.0" prefHeight="13.0" prefWidth="199.0" text="LAST ITEM INFO:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="CheckoutItemData" alignment="TOP_LEFT" layoutX="462.0" layoutY="96.0" prefHeight="93.0" prefWidth="199.0" text="ID/NAME/PRICE/BULK">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="ListCheckoutButton" layoutX="442.0" layoutY="311.0" mnemonicParsing="false" onAction="#unifiedCheckout" prefHeight="83.0" prefWidth="239.0" text="CHECKOUT">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Button>
+            <TextField fx:id="ItemWeightEntry" layoutX="462.0" layoutY="232.0" prefWidth="115.0" promptText="Enter Weight..." />
+            <Button fx:id="ListAddButton" layoutX="588.0" layoutY="232.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="25.0" prefWidth="83.0" text="Add Item" />
+            <TextField fx:id="ItemIDEntry" layoutX="462.0" layoutY="202.0" prefHeight="25.0" prefWidth="209.0" promptText="Enter Item ID..." />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="CheckoutGroup" layoutX="10.0" layoutY="12.0" prefHeight="447.0" prefWidth="697.0" visible="false">
+         <children>
+            <ListView fx:id="FinalItemList" editable="true" layoutX="29.0" layoutY="51.0" mouseTransparent="true" prefHeight="361.0" prefWidth="391.0" />
+            <Label layoutX="29.0" layoutY="14.0" prefHeight="30.0" prefWidth="148.0" text="FINAL LISTING" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="FinalCheckoutButton" layoutX="445.0" layoutY="343.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="52.0" prefWidth="217.0" text="CHECKOUT">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Button>
+            <Label fx:id="TotalLabel" alignment="TOP_LEFT" layoutX="444.0" layoutY="243.0" prefHeight="93.0" prefWidth="239.0" text="SUBTOTAL/TAX/TOTAL">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="PaymentFailureMessage" alignment="CENTER" layoutX="434.0" layoutY="423.0" prefHeight="21.0" prefWidth="239.0" />
+            <Label fx:id="PaymentRewardsData" alignment="TOP_LEFT" layoutX="446.0" layoutY="50.0" prefHeight="182.0" prefWidth="239.0" text="REWARDS DATA:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="CustomerInfoGroup" layoutX="444.0" layoutY="52.0" prefHeight="182.0" prefWidth="239.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="182.0" stroke="BLACK" strokeType="INSIDE" width="239.0" />
+                  <Label layoutX="29.0" layoutY="14.0" prefHeight="13.0" prefWidth="199.0" text="CUSTOMER INFO:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="CustomerInfoPIN" layoutX="29.0" layoutY="85.0" prefHeight="25.0" prefWidth="182.0" promptText="PIN Number..." />
+                  <TextField fx:id="CustomerInfoPhone" layoutX="29.0" layoutY="53.0" prefHeight="25.0" prefWidth="182.0" promptText="Phone Number..." />
+                  <Button fx:id="FinalCustomerButton" layoutX="29.0" layoutY="123.0" mnemonicParsing="false" onAction="#findCustomer" prefHeight="38.0" prefWidth="182.0" text="CHECK CUSTOMER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ConfirmGroup" layoutX="133.0" layoutY="95.0" prefHeight="269.0" prefWidth="442.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="269.0" stroke="BLACK" strokeType="INSIDE" width="442.0" />
+            <Label alignment="CENTER" layoutX="81.0" layoutY="42.0" prefHeight="69.0" prefWidth="281.0" text="Checkout Successful!">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button fx:id="ConfirmButton" layoutX="121.0" layoutY="127.0" mnemonicParsing="false" onAction="#unifiedItemListing" prefHeight="75.0" prefWidth="182.0" text="CONFIRM">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

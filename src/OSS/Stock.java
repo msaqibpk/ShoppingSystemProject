@@ -42,7 +42,7 @@ public class Stock {
             if(matching.getName() == items.getName())
                 return items;
         }
-        return new Item("ERROR",0.00, "ERROR", 0, "ERROR");
+        return new Item("ERROR",0.00, "ERROR", 0, false, "ERROR");
     }
 
     public boolean removeFromStock(Item matching){
@@ -60,7 +60,7 @@ public class Stock {
             if(name.equals(items.getItemID()))
                 return items;
         }
-        return new Item("ERROR",0.00, "ERROR", 0, "ERROR");
+        return new Item("ERROR",0.00, "ERROR", 0, false, "ERROR");
     }
 
     public void fillInventory() throws FileNotFoundException {

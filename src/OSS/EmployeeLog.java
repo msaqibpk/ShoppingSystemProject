@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Employeelog {
+class EmployeeLog {
     private ArrayList<Employee> EmployeeLog = new ArrayList<Employee>();
 
     public void insertNew(Employee newEmployee) {
