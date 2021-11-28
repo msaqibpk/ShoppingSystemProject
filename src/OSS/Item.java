@@ -7,7 +7,7 @@ public class Item {
     private String itemID;
     private double price;
     private String name;
-    private int numberOf = 0;
+    private double numberOf = 0;
     private boolean bulk;
     private String expDate;
 
@@ -28,22 +28,19 @@ public class Item {
         this.name = name;
     }
 
-    public int getNumberOf() {
+    public double getNumberOf() {
         return numberOf;
     }
 
-    public void setNumberOf(int numberOf) {
+    public void setNumberOf(double numberOf) {
         this.numberOf = numberOf;
     }
 
-    public void addNumItems(int quantity){
-        numberOf+=quantity;
-    }
-    public void subNumItems(int quantity){
-        numberOf-=quantity;
+    public void remove(double quantity){
+        this.numberOf -= quantity;
     }
 
-    public Item(String itemID, double price, String name, int numberOf, boolean bulk, String expDate) {
+    public Item(String itemID, double price, String name, double numberOf, boolean bulk, String expDate) {
         this.itemID = itemID;
         this.expDate = expDate;
         this.price = price;
@@ -66,6 +63,9 @@ public class Item {
 
     @Override
     public String toString() {
-        return (itemID+","+price + "," + name + "," + numberOf);
+        String isBulk = "No";
+        if(bulk)
+            isBulk = "Yes";
+        return (itemID+","+price + "," + name + "," + numberOf+","+isBulk+","+expDate);
     }
 }

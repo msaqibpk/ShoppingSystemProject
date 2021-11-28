@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.control.ListView;
@@ -30,7 +29,7 @@ public class CustomControl{
     @FXML
     Button LoginButt, ListCheckoutButton, ListAddButton, FinalCheckoutButton, FinalCustomerButton, ConfirmButton;
     @FXML
-    TextField LoginUsername, LoginPassword, ItemIDEntry, ItemWeightEntry, CustomerInfoPIN, CustomerInfoPhone;
+    TextField LoginUsername, LoginPassword, ItemIDEntry, ItemWeightEntry, CustomerInfoPIN, CustomerInfoPhone, PaymentCardInfo;
     @FXML
     AnchorPane LoginGroup, ItemListGroup, CheckoutGroup, CustomerInfoGroup, ConfirmGroup;
 
@@ -38,12 +37,10 @@ public class CustomControl{
     Stock inventory = new Stock();
     ReadInventory storeMaster = new ReadInventory();
     CashRegister terminal = new CashRegister();
-    ShoppingCart clientCart = new ShoppingCart();
     EmployeeLog userLog = new EmployeeLog();
     CustomerLog customerLog = new CustomerLog();
     Employee user;
     Customer client;
-    Shipping ship = new Shipping();
     Order orderLog = new Order();
     messageResponseBuffer mrb = new messageResponseBuffer();
     bankerThread bank = new bankerThread(mrb);
@@ -52,14 +49,14 @@ public class CustomControl{
 
     public void displayMainListing() {
         ObservableList<String> itemListing = FXCollections.observableArrayList();
-        for(Item items : clientCart.getCart()){
+        for(Item items : terminal.getCart()){
             itemListing.add(items.getName());
         }
         CheckoutItemList.setItems(itemListing);
         CheckoutItemList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> param) {
-                return new itemDisplayCard(inventory, clientCart);
+                return new itemDisplayCard(inventory, terminal);
             }
         });
 
@@ -67,12 +64,12 @@ public class CustomControl{
 
     public void displayCheckoutListing() {
         ObservableList<String> checkoutListing = FXCollections.observableArrayList();
-        for(Item items: clientCart.getCart()){
-            checkoutListing.add(String.format("%s: %s Quantity: %s Total: %s", items.getName(), items.getPrice(),
+        for(Item items: terminal.getCart()){
+            checkoutListing.add(String.format("%s: $%s Quantity: %s Total: $%s", items.getName(), items.getPrice(),
                     items.getNumberOf(), (items.getPrice() * items.getNumberOf())));
         }
-        CheckoutItemList.setItems(checkoutListing);
-        CheckoutItemList.setCellFactory(param -> new ListCell<String>(){
+        FinalItemList.setItems(checkoutListing);
+        FinalItemList.setCellFactory(param -> new ListCell<String>(){
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -111,10 +108,12 @@ public class CustomControl{
 
     public void unifiedCheckout() {
         clearAll();
-        displayCheckoutListing();
         CheckoutGroup.setVisible(true);
         CheckoutGroup.setMouseTransparent(false);
-        double charge = clientCart.cartTotal();
+        CustomerInfoGroup.setVisible(true);
+        CustomerInfoGroup.setMouseTransparent(false);
+        displayCheckoutListing();
+        double charge = terminal.cartTotal();
         TotalLabel.setText("TOTAL: " + charge);
     }
 
@@ -146,10 +145,19 @@ public class CustomControl{
         }
     }
 
-    public void addToCart() {
-        if(terminal.getProductByID(ItemIDEntry.getText(),inventory)) {
+    public void addToCart() { //Errorcode returns 1 if item can be added, -1 if over limit, -2 if not found
+        if(ItemWeightEntry.getText().equals(""))
+            ItemWeightEntry.setText("0.0");
+        short errorCode = terminal.addProductByID(ItemIDEntry.getText(), Double.parseDouble(ItemWeightEntry.getText()), inventory);
+        if (errorCode > 0) {
+            CheckoutItemData.setText(String.format("ID:%s %s \nPRICE: %s BULK: %s",terminal.lastAdded.getItemID(), terminal.lastAdded.getName(),
+                    terminal.lastAdded.getPrice(),terminal.lastAdded.getBulk()));
             displayMainListing();
         }
+        else if(errorCode == -1)
+            CheckoutItemData.setText("Stock limit reached\n for selected item.");
+        else
+            CheckoutItemData.setText("Item not found.");
     }
 
     public void findCustomer() throws IOException {
@@ -157,6 +165,8 @@ public class CustomControl{
             client = customerLog.associateUser(CustomerInfoPIN.getText(), CustomerInfoPhone.getText());
             CustomerInfoGroup.setVisible(false);
             CustomerInfoGroup.setMouseTransparent(true);
+            PaymentRewardsData.setText("REWARDS DATA: \nNAME: " + client.name + "\nPOINTS: " + client.custPoints);
+            PaymentCardInfo.setText(client.bankID);
 
         } else {
             FinalCustomerButton.setText("Not Found");
@@ -173,19 +183,30 @@ public class CustomControl{
         }
         else if(bankCode > 0){
             inventory.writeToFile(); //Todo register should send call to inventory.
-            orderLog.noteOrder(client, clientCart);
+            orderLog.noteOrder(client, terminal);
             if(client!=null)
-                client.addPoints((int)clientCart.cartTotal());
+                client.addPoints((int)terminal.cartTotal());
             unifiedConfirm();
         }
     }
 
     public void resolveOrder(messageResponseBuffer m) {
         String ossOutput;
-        ossOutput = clientCart.placeOrder(client);
+        ossOutput = terminal.placeOrder(PaymentCardInfo.getText());
         System.out.println(ossOutput);
         bankCode = m.send(ossOutput);
-        clientCart.setCode(bankCode);
+        terminal.setCode(bankCode);
+    }
+
+    public void orderConfirmed() throws IOException {
+        inventory.removeOrderFromStock(terminal);
+        inventory.writeToFile();
+        terminal.emptyCart();
+        customerLog.saveToFile(customerLog.getCustomerLog());
+        client = null;
+        unifiedItemListing();
+        displayMainListing();
+
     }
 
 }

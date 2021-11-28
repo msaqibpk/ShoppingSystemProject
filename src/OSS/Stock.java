@@ -39,20 +39,16 @@ public class Stock {
 
     public Item matchedItem(Item matching){
         for(Item items : this.inventory) {
-            if(matching.getName() == items.getName())
+            if(matching.getName().equals(items.getName()))
                 return items;
         }
         return new Item("ERROR",0.00, "ERROR", 0, false, "ERROR");
     }
 
-    public boolean removeFromStock(Item matching){
-        for(Item items : this.inventory) {
-            if(matching.getName() == items.getName() && items.getNumberOf() > 0){
-                items.setNumberOf(items.getNumberOf() - 1);
-                return true;
-            }
+    public void removeOrderFromStock(CashRegister terminal){
+        for(Item items : terminal.getCart()) {
+            matchByID(items.getItemID()).remove(items.getNumberOf());
         }
-        return false;
     }
 
     public Item matchByID(String name){

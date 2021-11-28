@@ -1,1 +1,1 @@
-C37A4B,06/18/1940,Arson Lupin,10000,H!5327 Dank Run!Lubbock!Texas!75555,LupinUsername,LupinPassword
+C37A4B,06/18/1940,Arson Lupin,10000,H!5327 Dank Run!Lubbock!Texas!75555,U,P

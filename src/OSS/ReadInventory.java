@@ -13,20 +13,21 @@ class ReadInventory{
         ArrayList<Item> TempArrl = new ArrayList<>();
         int count = 0;
         double priceTemp;
-        int quantityTemp;
+        double quantityTemp;
         String idTemp;
         String expDate;
         String name;
-        boolean bulk = true;
+        boolean bulk;
         File Inventory = new File("Inventory.txt");
         Scanner scInventory = new Scanner(Inventory);
         while(scInventory.hasNextLine()){
+            bulk = true;
             itemTemp = scInventory.nextLine().split(",");
             idTemp = itemTemp[0];
             priceTemp = Double.parseDouble(itemTemp[1]);
             name = itemTemp[2];
-            quantityTemp = Integer.parseInt(itemTemp[3]);
-            if(itemTemp[4].equals("NO"))
+            quantityTemp = Double.parseDouble(itemTemp[3]);
+            if(itemTemp[4].equals("No"))
                 bulk = false;
             expDate = itemTemp[5];
             TempArrl.add(count,new Item(idTemp,priceTemp,name,quantityTemp, bulk, expDate));

@@ -20,8 +20,8 @@ class bankerThread implements Runnable {
             this.balance = balance;
         }
 
-        boolean isMatch(String name, String cardNumber) {
-            return name.equals(this.name) && cardNumber.equals(this.cardNumber);
+        boolean isMatch(String cardNumber) {
+            return cardNumber.equals(this.cardNumber);
         }
 
         String writeInfo() {
@@ -37,11 +37,10 @@ class bankerThread implements Runnable {
     private int chargeAmount(String ossInput) {
         Random yeet = new Random();
         String[] input = ossInput.split(",");
-        String name = input[0];
-        String number = input[1];
-        double charge = Double.parseDouble(input[2]);
+        String number = input[0];
+        double charge = Double.parseDouble(input[1]);
         for(bankCustomer current : clients) {
-            if(current.isMatch(name, number)) {
+            if(current.isMatch(number)) {
                 System.out.println("Match found.");
                 if(current.balance > charge){
                     current.balance -= charge;

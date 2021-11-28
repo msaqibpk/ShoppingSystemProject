@@ -12,28 +12,28 @@
    <children>
       <AnchorPane fx:id="LoginGroup" layoutY="2.0" prefHeight="447.0" prefWidth="697.0">
          <children>
-            <Rectangle fx:id="LoginBack" arcHeight="5.0" arcWidth="5.0" fill="#ffe357" height="280.0" layoutX="180.0" layoutY="84.0" mouseTransparent="false" stroke="BLACK" strokeType="INSIDE" visible="true" width="308.0" />
-            <Button fx:id="LoginButt" layoutX="235.0" layoutY="263.0" mnemonicParsing="false" mouseTransparent="false" onAction="#login" prefHeight="25.0" prefWidth="199.0" text="Login" visible="true">
+            <Rectangle fx:id="LoginBack" arcHeight="5.0" arcWidth="5.0" fill="#ffe357" height="280.0" layoutX="195.0" layoutY="84.0" mouseTransparent="false" stroke="BLACK" strokeType="INSIDE" visible="true" width="308.0" />
+            <Button fx:id="LoginButt" layoutX="250.0" layoutY="263.0" mnemonicParsing="false" mouseTransparent="false" onAction="#login" prefHeight="25.0" prefWidth="199.0" text="Login" visible="true">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <TextField fx:id="LoginUsername" layoutX="215.0" layoutY="157.0" mouseTransparent="false" prefHeight="38.0" prefWidth="239.0" promptText="Username..." visible="true">
+            <TextField fx:id="LoginUsername" layoutX="230.0" layoutY="157.0" mouseTransparent="false" prefHeight="38.0" prefWidth="239.0" promptText="Username..." visible="true">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="LoginPassword" layoutX="215.0" layoutY="206.0" mouseTransparent="false" prefHeight="37.0" prefWidth="239.0" promptText="Password..." visible="true">
+            <TextField fx:id="LoginPassword" layoutX="230.0" layoutY="206.0" mouseTransparent="false" prefHeight="37.0" prefWidth="239.0" promptText="Password..." visible="true">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label fx:id="LoginButton" alignment="CENTER" layoutX="244.0" layoutY="116.0" mouseTransparent="False" prefHeight="27.0" prefWidth="182.0" text="Employee Logon">
+            <Label fx:id="LoginButton" alignment="CENTER" layoutX="259.0" layoutY="116.0" mouseTransparent="False" prefHeight="27.0" prefWidth="182.0" text="Employee Logon">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="LoginFailure" alignment="CENTER" layoutX="243.0" layoutY="315.0" mouseTransparent="False" prefHeight="27.0" prefWidth="182.0" visible="false" />
+            <Label fx:id="LoginFailure" alignment="CENTER" layoutX="258.0" layoutY="315.0" mouseTransparent="False" prefHeight="27.0" prefWidth="182.0" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="ItemListGroup" layoutX="10.0" layoutY="12.0" prefHeight="447.0" prefWidth="697.0" visible="false">
@@ -106,6 +106,7 @@
                   </Button>
                </children>
             </AnchorPane>
+            <TextField fx:id="PaymentCardInfo" layoutX="471.0" layoutY="310.0" prefHeight="25.0" prefWidth="182.0" promptText="Card Number" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="ConfirmGroup" layoutX="133.0" layoutY="95.0" prefHeight="269.0" prefWidth="442.0" visible="false">
@@ -116,7 +117,7 @@
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Button fx:id="ConfirmButton" layoutX="121.0" layoutY="127.0" mnemonicParsing="false" onAction="#unifiedItemListing" prefHeight="75.0" prefWidth="182.0" text="CONFIRM">
+            <Button fx:id="ConfirmButton" layoutX="121.0" layoutY="127.0" mnemonicParsing="false" onAction="#orderConfirmed" prefHeight="75.0" prefWidth="182.0" text="CONFIRM">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
