@@ -1,3 +1,1 @@
-(123)-456-7890:
-null 'Hot Cocoa': 2.0
-
+28/11/2021 18:45:30, STORE: IMACON Lubbock, TX, EMPLOYEE: Arson Lupin: CARD: 9.98

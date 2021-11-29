@@ -29,9 +29,11 @@ public class CustomControl{
     @FXML
     Button LoginButt, ListCheckoutButton, ListAddButton, FinalCheckoutButton, FinalCustomerButton, ConfirmButton;
     @FXML
-    TextField LoginUsername, LoginPassword, ItemIDEntry, ItemWeightEntry, CustomerInfoPIN, CustomerInfoPhone, PaymentCardInfo;
+    TextField LoginUsername, LoginPassword, ItemIDEntry, ItemWeightEntry, CustomerInfoPIN, CustomerInfoPhone, PaymentCardInfo, PaymentCashInfo;
     @FXML
     AnchorPane LoginGroup, ItemListGroup, CheckoutGroup, CustomerInfoGroup, ConfirmGroup;
+    @FXML
+    CheckBox isCheck;
 
 
     Stock inventory = new Stock();
@@ -39,12 +41,12 @@ public class CustomControl{
     CashRegister terminal = new CashRegister();
     EmployeeLog userLog = new EmployeeLog();
     CustomerLog customerLog = new CustomerLog();
-    Employee user;
     Customer client;
     Order orderLog = new Order();
     messageResponseBuffer mrb = new messageResponseBuffer();
     bankerThread bank = new bankerThread(mrb);
     int bankCode;
+    double charge;
 
 
     public void displayMainListing() {
@@ -113,7 +115,7 @@ public class CustomControl{
         CustomerInfoGroup.setVisible(true);
         CustomerInfoGroup.setMouseTransparent(false);
         displayCheckoutListing();
-        double charge = terminal.cartTotal();
+        charge = terminal.cartTotal();
         TotalLabel.setText("TOTAL: " + charge);
     }
 
@@ -137,7 +139,7 @@ public class CustomControl{
     //Unified Logic Methods
     public void login() throws IOException {
         if (userLog.verifyLogIn(LoginUsername.getText(), LoginPassword.getText())) {
-            user = userLog.associateUser(LoginUsername.getText(), LoginPassword.getText());
+            terminal.setUser(userLog.associateUser(LoginUsername.getText(), LoginPassword.getText()));
             unifiedItemListing();
 
         } else {
@@ -158,6 +160,7 @@ public class CustomControl{
             CheckoutItemData.setText("Stock limit reached\n for selected item.");
         else
             CheckoutItemData.setText("Item not found.");
+        terminal.setCode(0);
     }
 
     public void findCustomer() throws IOException {
@@ -174,20 +177,38 @@ public class CustomControl{
     }
 
     public void placeOrder() throws Exception {
-        resolveOrder(mrb);
-        if(bankCode == -1){
-            PaymentFailureMessage.setText("The bank didn't find that card.");
+        if(PaymentCardInfo.getText().equals("")) {
+            if(PaymentCashInfo.getText().equals(""))
+            charge -= Double.parseDouble(PaymentCashInfo.getText());
+            if (charge < 0) {
+                charge *= -1;
+                System.out.println("Cash Confirmed, Till Open. CHANGE: " + charge);
+                inventory.writeToFile(); //Todo register should send call to inventory.
+                orderLog.printPaymentInfo(terminal, PaymentCardInfo.getText(), isCheck.isSelected());
+                if(client!=null)
+                    client.addPoints((int)terminal.cartTotal());
+                unifiedConfirm();
+            } else {
+                System.out.println("Cash Confirmed. Remaining Charge: " + charge);
+            }
         }
-        else if(bankCode == -2){
-            PaymentFailureMessage.setText("Card Declined.");
+        else{
+            resolveOrder(mrb);
+            if(bankCode == -1){
+                PaymentFailureMessage.setText("The bank didn't find that card.");
+            }
+            else if(bankCode == -2){
+                PaymentFailureMessage.setText("Card Declined.");
+            }
+            else if(bankCode > 0){
+                inventory.writeToFile(); //Todo register should send call to inventory.
+                orderLog.printPaymentInfo(terminal, PaymentCardInfo.getText(), isCheck.isSelected());
+                if(client!=null)
+                    client.addPoints((int)terminal.cartTotal());
+                unifiedConfirm();
+            }
         }
-        else if(bankCode > 0){
-            inventory.writeToFile(); //Todo register should send call to inventory.
-            orderLog.noteOrder(client, terminal);
-            if(client!=null)
-                client.addPoints((int)terminal.cartTotal());
-            unifiedConfirm();
-        }
+        charge = 0;
     }
 
     public void resolveOrder(messageResponseBuffer m) {

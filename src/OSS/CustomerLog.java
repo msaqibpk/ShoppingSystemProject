@@ -25,16 +25,6 @@ class CustomerLog {
         }
         return false;
     }
-    public Boolean noDupUser(String phoneNum) throws IOException {
-        readFromFile();
-        for (Customer Customers : CustomerLog)
-        {
-            if (phoneNum.equals(Customers.phoneNum)){
-                return true;//The phoneNum is a duplicate
-            }
-
-        }return false;//Not a duplicate
-    }
 
     public Customer associateUser(String phoneNum, String custPIN) {
         for (Customer Customers : CustomerLog) {
@@ -120,25 +110,5 @@ class CustomerLog {
         clerk.close();
     }
 }
-
-//Commented out because the customer log is in 1 file
-//    public void setUpLog()
-//    {
-//        try
-//        {
-//            File logger = new File("CustomerLog.txt");
-//            if(logger.createNewFile())
-//                System.out.println("CustomerLog was created as new.");
-//            else
-//                System.out.println("CustomerLog was found existing.");
-//            readFromFile();
-//        }
-//        catch (IOException x)
-//        {
-//            System.out.println("The file failed to generate. We kinda need that to work.");
-//        }
-//    }
-//
-//}
 
 

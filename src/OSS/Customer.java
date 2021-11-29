@@ -53,7 +53,7 @@ class Customer
         char iP = 'N';
         if(isPremium)
             iP = 'P';
-        return iP+ "," + this.phoneNum+ "," + this.custPIN + "," + this.custPoints + "," + this.name + ",BANK:," + this.bankID + ",SHIP:," + this.shipTo.compileAddr();
+        return iP+ "," + this.custPIN+ "," + this.phoneNum + "," + this.custPoints + "," + this.name + ",BANK:," + this.bankID + ",SHIP:," + this.shipTo.compileAddr();
     }
 
     public Shipping setUp(String input){

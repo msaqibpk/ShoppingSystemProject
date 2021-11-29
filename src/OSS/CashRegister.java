@@ -7,14 +7,12 @@ public class CashRegister {
     private ArrayList<Item> Cart = new ArrayList<>();
     private int bankCode = 0;
     Item lastAdded;
+    private double charge;
+    Employee user;
 
     //Methods
     public ArrayList<Item> getCart() {
         return Cart;
-    }
-
-    public void setCode(int code) {
-        bankCode = code;
     }
 
     public short addProductByID(String ID, double weight, Stock stock) { //Returns 1 for success, -1 for exceeding stock limit, -2 for not finding
@@ -65,15 +63,32 @@ public class CashRegister {
         for (Item item : Cart) {
             total += (item.getPrice() * item.getNumberOf());
         }
+        charge = total;
         return total;
+    }
+
+    public double getCharge()
+    {
+        return charge;
     }
 
     public String placeOrder(String bankID) {
         return String.format("%s,%s",bankID, cartTotal());
     }
 
+    public void setCode(int code) {
+        bankCode = code;
+    }
+
     public int getBankCode(){
         return this.bankCode;
     }
 
+    public Employee getUser(){
+        return user;
+    }
+
+    public void setUser(Employee user){
+        this.user = user;
+    }
 }

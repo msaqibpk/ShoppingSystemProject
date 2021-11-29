@@ -68,6 +68,7 @@ public class Stock {
             System.out.println(stock.getInventory().get(i).toString());
         }*/
     }
+
     public void writeToFile() throws IOException {
         String output = "";
         PrintWriter clerk = new PrintWriter("Inventory.txt");
@@ -77,6 +78,8 @@ public class Stock {
         clerk.write(output.trim());
         clerk.close();
     }
+
+
 
 }
 
