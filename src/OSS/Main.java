@@ -24,6 +24,7 @@ public class Main extends Application {
         primaryStage.setScene(mainScene);
         // Show the window.
         primaryStage.show();
+        DynamicInventoryManager.AutomatedOrder();
     }
 
 
