@@ -1,4 +1,4 @@
-package OSS;
+
 
 public class Shipping {
     private boolean Apartment = false;

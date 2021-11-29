@@ -1,4 +1,3 @@
-package OSS;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +17,7 @@ import java.util.Objects;
 
 public class CustomControl{
 
-    private final Image bezosLul = new Image("OSS/mynamejeff.png");
+    //private final Image bezosLul = new Image("OSS/mynamejeff.png");
 
     //Main Display Sections
 
@@ -98,8 +97,9 @@ public class CustomControl{
         displayMainListing();
     }
 
-    public void unifiedCheckout() {
+    public void unifiedCheckout() throws IOException {
         clearAll();
+        customerLog.readFromFile();
         CheckoutGroup.setVisible(true);
         CheckoutGroup.setMouseTransparent(false);
         CustomerInfoGroup.setVisible(true);
@@ -169,15 +169,15 @@ public class CustomControl{
     public void placeOrder() throws Exception {
         if(PaymentCardInfo.getText().equals("")) {
             if(PaymentCashInfo.getText().equals(""))
-            charge -= Double.parseDouble(PaymentCashInfo.getText());
-            if (charge < 0) {
-                charge *= -1;
-                System.out.println("Cash Confirmed, Till Open. CHANGE: " + charge);
+                charge -= Double.parseDouble(PaymentCashInfo.getText());
+            if (charge == 0) {
+                System.out.println("Cash Confirmed, Till Open");
                 inventory.writeToFile(); //Todo register should send call to inventory.
                 terminal.printPaymentInfo(PaymentCardInfo.getText(), isCheck.isSelected());
                 if(client!=null)
                     client.addPoints((int)terminal.cartTotal());
                 unifiedConfirm();
+                System.out.println("Till Closed");
             } else {
                 System.out.println("Cash Confirmed. Remaining Charge: " + charge);
             }

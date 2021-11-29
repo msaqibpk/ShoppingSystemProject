@@ -1,4 +1,4 @@
-package OSS;
+
 class Customer
 {
     Boolean isPremium;

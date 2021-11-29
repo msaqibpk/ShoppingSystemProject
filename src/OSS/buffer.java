@@ -1,4 +1,3 @@
-package OSS;
 import java.util.*;
 import java.io.*;
 import java.util.Scanner;
@@ -157,7 +156,7 @@ class messageResponseBuffer {
         int received = response;
         response = 0;
         responseBufferFull = false;
-        System.out.println("Response buffer cleared");
+        //System.out.println("Response buffer cleared");
         return received;
     }
 
@@ -175,7 +174,7 @@ class messageResponseBuffer {
         System.out.println(outMess + " received.");
         message = "";
         messageBufferFull = false;
-        System.out.println("Message buffer cleared.");
+        //System.out.println("Message buffer cleared.");
         return outMess;
     }
 

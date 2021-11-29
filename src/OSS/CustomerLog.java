@@ -1,4 +1,4 @@
-package OSS;
+import java.io.FileWriter;
 import java.util.*;
 import java.io.File;
 import java.io.PrintWriter;
@@ -51,7 +51,8 @@ class CustomerLog {
 
     private void writeToFile() throws IOException {
         String output = "";
-        PrintWriter clerk = new PrintWriter("CustomerLog.txt");
+        File log = new File("CustomerLog.txt");
+        FileWriter clerk = new FileWriter(log);
         for (Customer current : CustomerLog) {
             output += current.writeInfo() + "\n";
         }
@@ -60,6 +61,7 @@ class CustomerLog {
     }
 
     public void readFromFile() throws IOException {
+        CustomerLog.clear();
         //setUpLog will create a file of this type if one did not already exist.
         File file = new File("CustomerLog.txt");
         Scanner clerk = new Scanner(file);
@@ -110,5 +112,3 @@ class CustomerLog {
         clerk.close();
     }
 }
-
-
