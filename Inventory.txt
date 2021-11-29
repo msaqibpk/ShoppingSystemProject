@@ -1,4 +1,4 @@
-1,9.98, 'Hot Cocoa',484.0,No, '2022-07-29'
+1,9.98, 'Hot Cocoa',483.0,No, '2022-07-29'
 2,5.34, 'Apple Cider',310.0,No, '2022-04-08'
 3,3.53, 'Pumpkin Spice Blondie Brownie',130.0,No, '2022-04-20'
 4,5.49, 'Cheddar Bay Frozen Biscuits',120.0,No, '2022-02-10'

@@ -42,7 +42,6 @@ public class CustomControl{
     EmployeeLog userLog = new EmployeeLog();
     CustomerLog customerLog = new CustomerLog();
     Customer client;
-    Order orderLog = new Order();
     messageResponseBuffer mrb = new messageResponseBuffer();
     bankerThread bank = new bankerThread(mrb);
     int bankCode;
@@ -83,15 +82,6 @@ public class CustomControl{
                 }
             }
         });
-    }
-
-    //Conversion to Unified Methods
-    public void openUnified() throws IOException{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("test.fxml")));
-        Stage unified = new Stage();
-        unified.setScene(new Scene(root, 800, 400));
-        //should open login by default.
-        unifiedLogin();
     }
 
     public void unifiedLogin() {
@@ -184,7 +174,7 @@ public class CustomControl{
                 charge *= -1;
                 System.out.println("Cash Confirmed, Till Open. CHANGE: " + charge);
                 inventory.writeToFile(); //Todo register should send call to inventory.
-                orderLog.printPaymentInfo(terminal, PaymentCardInfo.getText(), isCheck.isSelected());
+                terminal.printPaymentInfo(PaymentCardInfo.getText(), isCheck.isSelected());
                 if(client!=null)
                     client.addPoints((int)terminal.cartTotal());
                 unifiedConfirm();
@@ -202,7 +192,7 @@ public class CustomControl{
             }
             else if(bankCode > 0){
                 inventory.writeToFile(); //Todo register should send call to inventory.
-                orderLog.printPaymentInfo(terminal, PaymentCardInfo.getText(), isCheck.isSelected());
+                terminal.printPaymentInfo(PaymentCardInfo.getText(), isCheck.isSelected());
                 if(client!=null)
                     client.addPoints((int)terminal.cartTotal());
                 unifiedConfirm();

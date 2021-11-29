@@ -1,6 +1,11 @@
 package OSS;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CashRegister {
     //Attributes
@@ -90,5 +95,21 @@ public class CashRegister {
 
     public void setUser(Employee user){
         this.user = user;
+    }
+
+    public void printPaymentInfo(String bankID, boolean isCheck) throws IOException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        File orderLog = new File("OrderLog.txt");
+        FileWriter clerk = new FileWriter(orderLog);
+        String orderLine = formatter.format(date) + ", STORE: IMACON Lubbock, TX" + ", EMPLOYEE: " + user.name + " ";
+        if(bankID.equals(""))
+            orderLine += "CASH: " + charge;
+        else if(isCheck)
+            orderLine += "CHECK: " + charge;
+        else
+            orderLine += "CARD: " + charge;
+        clerk.write(orderLine);
+        clerk.close();
     }
 }
